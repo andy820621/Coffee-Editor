@@ -28,13 +28,18 @@ const editing = ref(true);
 
 <template>
 	<div class="editorButton">
-		<label for="editorButton"> Editing: </label>
-		<input type="checkbox" id="editorButton" v-model="editing" />
-		<select id="" v-model="favoriteType">
-			<option v-for="coffee in coffees" :value="coffee.name">
-				{{ coffee.name }}
-			</option>
-		</select>
+		<div class="editor-control">
+			<label for="editingButton"> Editing: </label>
+			<input type="checkbox" id="editingButton" v-model="editing" />
+		</div>
+		<div class="editor-control">
+			<label for="best"> Best: </label>
+			<select id="best" v-model="favoriteType">
+				<option v-for="coffee in coffees" :value="coffee.name">
+					{{ coffee.name }}
+				</option>
+			</select>
+		</div>
 	</div>
 	<h1>Coffee Editor</h1>
 	<div
@@ -226,7 +231,10 @@ h1 {
 		}
 		&.favorite {
 			&::before {
-				transform: translateY(-3rem) rotate(-24deg);
+				transform: translateY(-3.4rem) rotate(-24deg);
+				@media (min-width: 40em) {
+					transform: translateX(-2.4rem) translateY(-1.4rem) rotate(-24deg);
+				}
 			}
 		}
 	}
@@ -235,8 +243,15 @@ h1 {
 	position: fixed;
 	left: 0.8rem;
 	top: 0.8rem;
-	select {
-		margin-left: 2rem;
+	display: grid;
+	gap: 0.5rem;
+	.editor-control {
+		display: flex;
+		align-items: center;
+		font-size: max(1.6vw, 1.2rem);
+		label {
+			margin-right: 0.5rem;
+		}
 	}
 }
 </style>
